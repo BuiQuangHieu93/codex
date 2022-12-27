@@ -19,6 +19,7 @@ function loader(element) {
 
 function typeText(element, text) {
   let index = 0;
+
   let interval = setInterval(() => {
     if (index < text.length) {
       element.innerHTML += text.charAt(index);
@@ -28,6 +29,7 @@ function typeText(element, text) {
     }
   }, 20);
 }
+
 function generationUniqueId() {
   const timestamp = Date.now();
   const randomNumber = Math.random();
