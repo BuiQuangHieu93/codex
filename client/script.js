@@ -52,24 +52,29 @@ function chatStripe(isAi, value, uniqueId) {
 
 const handleSubmit = async (e) => {
   e.preventDefault();
+
   const data = new FormData(form);
 
-  //user chat stripe //
-
+  // user's chatstripe
   chatContainer.innerHTML += chatStripe(false, data.get("prompt"));
+
+  // to clear the textarea input
   form.reset();
-  // bot chat stripe//
 
-  const uniqueId = generationUniqueId();
-  chatContainer.innerHTML += chatStripe(true, "", uniqueId);
+  // bot's chatstripe
+  const uniqueId = generateUniqueId();
+  chatContainer.innerHTML += chatStripe(true, " ", uniqueId);
 
+  // to focus scroll to the bottom
   chatContainer.scrollTop = chatContainer.scrollHeight;
 
+  // specific message div
   const messageDiv = document.getElementById(uniqueId);
+
+  // messageDiv.innerHTML = "..."
   loader(messageDiv);
 
-  // fetch data from server//
-  const response = await fetch("https://codex-yqyb.onrender.com/", {
+  const response = await fetch("https://codex-im0y.onrender.com/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -78,14 +83,14 @@ const handleSubmit = async (e) => {
       prompt: data.get("prompt"),
     }),
   });
-  clearInterval(loadInterval);
-  messageDiv.innerHTML += "";
 
-  console.log(response);
+  clearInterval(loadInterval);
+  messageDiv.innerHTML = " ";
 
   if (response.ok) {
     const data = await response.json();
-    const parsedData = data.bot.trim();
+    const parsedData = data.bot.trim(); // trims any trailing spaces/'\n'
+
     typeText(messageDiv, parsedData);
   } else {
     const err = await response.text();
