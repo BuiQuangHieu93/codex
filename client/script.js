@@ -62,7 +62,7 @@ const handleSubmit = async (e) => {
   form.reset();
 
   // bot's chatstripe
-  const uniqueId = generateUniqueId();
+  const uniqueId = generationUniqueId();
   chatContainer.innerHTML += chatStripe(true, " ", uniqueId);
 
   // to focus scroll to the bottom
@@ -74,7 +74,7 @@ const handleSubmit = async (e) => {
   // messageDiv.innerHTML = "..."
   loader(messageDiv);
 
-  const response = await fetch("https://codex-im0y.onrender.com/", {
+  const response = await fetch("https://codex-yqyb.onrender.com/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
